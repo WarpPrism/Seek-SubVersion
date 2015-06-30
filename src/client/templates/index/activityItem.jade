@@ -1,0 +1,25 @@
+template(name="activityItem")
+    div.activity-item.ui.blue.segment
+        div.name-block
+            div.activity-name.ui.ribbon.blue.label
+                h1 #{name}
+        div.activity-cover
+            each images
+                img(src="{{this.url}}")
+        div.activity-info.activity-detail
+            a.ui.blue.button(href="/activity/#{_id}") 活动详情
+        div.activity-info
+            div.info-block.ui.vertical.orange.inverted.segment
+                p 时间:
+                    span.starting-time #{startingTime}
+            div.info-block.ui.vertical.inverted.segment.green
+                p 地点: #{place}
+            div.info-block.ui.vertical.inverted.segment.purple
+                p 发起人:
+                    span
+                        each sponsorImages
+                            img.ui.avatar.image(src="#{this.url}")
+                    span #{sponsor}
+            div.info-block.ui.vertical.inverted.teal.segment
+                p 类型: #{typename}
+

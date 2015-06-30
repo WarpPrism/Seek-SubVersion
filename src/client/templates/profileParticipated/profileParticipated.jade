@@ -1,0 +1,32 @@
+template(name="profileParticipated")
+	header
+		h2.ui.header
+			div.content 个人活动列表
+			div(class="ui buttons" style="float:right")
+				a(class="ui button" href="/profile/") 作为发起人
+				a(class="ui button" href="/profileParticipated/") 作为参与者
+				//- a(class="ui button dark" href="/changeProfile/") 修改个人资料
+			div.ui.divider
+			
+	section.ui.three.cards
+		div.sponsor
+		each activities
+			div(class='card' )
+				div.image
+					a(href='/activity/#{_id}' style="display:block")
+						each images
+							img(src="{{this.url}}" style="width:100%")
+					
+				div.content
+					div.header #{name}
+					div.meta #{startingTime}
+					div.meta
+						span 发起人:
+							span #{sponsor}
+				div.extra.content
+					a(href='/activity/#{_id}' style="display:block")
+						div.ui.right.floated.primary.button 评论
+		if nextPath
+			.next-button(style='margin:10px auto')
+				a.ui.button(href="#{nextPath}") 加载更多
+		

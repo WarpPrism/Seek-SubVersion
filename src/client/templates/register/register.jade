@@ -1,0 +1,61 @@
+template(name="register")
+  .login.login-register
+    form(method="post")
+      .ui.form.segment
+        .field.username
+          label 用户名
+          .login-user
+            i.user.icon
+            input(type="text", placeholder="Username", name="usernameForRegister")
+            .username-existed #{registerUsernameError}
+        .field.password
+          label 密码
+          .login-password
+            i.lock.icon
+            input(type="password", placeholder="Password", name="passwordForRegister")
+        .field.passwordConfirm
+          label 确认密码
+          .login-password
+            i.lock.icon
+            input(type="password", placeholder="Password Confirm", name="passwordForRegisterConfirm")
+        .field.nickname
+          label 昵称
+          .login-name
+            i.users.icon
+            input(type="text", placeholder="Name", name="nickname")
+        .field.sex
+          label 性别
+          .login-sexual
+            i.male.icon
+            select(name="sex")
+              option(value="male") 男
+              option(value="female") 女
+        .field.tel
+          label 手机号码
+          .login-tel
+            i.mobile.icon
+            input(type="text", placeholder="Tel", name="tel")
+        .field.qq
+          label QQ
+          .login-qq
+            i.qq.icon
+            input(type="text", placeholder="QQ", name="qq")
+        .field.mail
+          label 邮箱
+          .login-mail
+            i.mail.icon
+            input(type="text", placeholder="Mail", name="mail")
+        .field.show-avatar-field.avatar
+          .show-avatar
+            img(src="", id="cover")
+          label 头像
+          .ui.input
+            input(type="file", name="avatar" class="avatar-input")
+        .ui.error.message
+        .ui.buttons
+          button.ui.positive.button.confirm.submit(type="submit") 确定
+          .or
+          button.ui.positive.button.register-back-login 返回
+   
+
+

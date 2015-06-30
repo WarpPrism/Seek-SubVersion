@@ -1,0 +1,61 @@
+.activity-cover {
+	display: inline-block;
+	margin-top: 40px;
+}
+
+.activity-info {
+	display: inline-block;
+	float: right;
+	margin-right: 60px;
+}
+
+.name-block {
+	width: 150px;
+	display: inline-block;
+}
+
+.activity-name {
+	display: inline-block;
+	width: 70px;
+}
+
+.info-block {
+	font-weight: 800;
+	font-size: 10pt;
+}
+
+.next-button {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.activity-detail {
+	margin-bottom: 10px;
+}
+
+.activity-detail a {
+	margin-top: 120% !important;
+}
+
+.activity-cover {
+	height: 200px;
+	width: 200px;
+}
+
+.activity-cover img {
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+}
+
+.time-border {
+	display: inline-block;
+}
+
+.filter {
+	float: right;
+}
+
+.to-hide {
+	display: none;
+}

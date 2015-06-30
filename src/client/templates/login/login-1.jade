@@ -1,0 +1,19 @@
+template(name='login1')
+  .login.login-log
+    form.login-form(method='post', action='/')
+      .ui.form.segment
+        .field
+          label Username
+          .login-user
+            i.user.icon
+            input(placeholder='Username', type='text', name='username', required)
+        .field
+          label Password
+          .login-password
+            i.lock.icon
+            input(placeholder='Password', type='password', name='password', required)
+        .ui.buttons.login-button
+          .ui.positive.button(type='submit') 登陆
+          .or
+          .ui.button
+            a(href='./register.html') 注册

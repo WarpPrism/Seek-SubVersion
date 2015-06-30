@@ -1,0 +1,24 @@
+template(name='login')
+  .login.login-log
+    form.login-form(method='post')
+      .ui.form.segment
+        .field
+          label 用户名
+          .login-user
+            i.user.icon
+            input(placeholder='Username', type='text', name='username', required)
+        .field
+          label 密码
+          .login-password
+            i.lock.icon
+            input(placeholder='Password', type='password', name='password', required)
+        .ui.error.message
+          ui.list
+        .ui.buttons.login-button
+          button.ui.positive.button(type='submit') 登录
+          .or
+          button.ui.positive.button.login-register-btn 注册
+          .or
+          button.ui.positive.button.login-back-home 主页
+
+        +loginButtons

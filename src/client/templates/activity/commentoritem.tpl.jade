@@ -1,0 +1,15 @@
+div.comment
+  a.avatar
+    h3
+      //-i.icon.user.inverted.green.circular
+      if hasHeadphoto
+        each headphoto
+          img.headphoto(src="#{this.url}")
+      else
+        i.icon.user.inverted.green.circular
+  .content
+    a.author #{applierName}
+    .metadata
+      span.date #{day}
+    .text
+      | #{comment}

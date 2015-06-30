@@ -1,0 +1,103 @@
+.createActivityForm
+	form(name="createActivity", class="createActivity", enctype="multipart/form-data")
+		.ui.horizontal.segment
+			#mainPageContent
+				#pageContentTitle.ui.black.segment
+					h2.ui.header
+						i.flag.icon
+						.content 发布活动
+						.sub.header 约起小伙伴，相与步于中庭。
+				#pageContentBody
+					.ui.segment
+						a.ui.green.ribbon.label 温馨提示
+						|                 细心填写表单有助于更多小伙伴参与活动哦～
+					.ui.large.error.form.segment
+						a.ui.blue.right.ribbon.label 活动表单
+						.required.field
+							label(for='') 活动名称
+							.ui.left.icon.input
+								input(type='text', name="ActivityName", placeholder='活动名称', required)
+								i.puzzle.piece.icon
+						.required.fields
+							.field
+								label(for='') 活动开始时间
+								.ui.left.icon.input
+									input(type='text', class="datetimepicker", name="ActivityStartTime", placeholder='活动开始时间', required)
+									i.time.icon
+							.field
+								label(for='') 活动结束时间
+								.ui.left.icon.input
+									input(type='text', class="datetimepicker", name="ActivityEndTime", placeholder='活动结束时间', required)
+									i.time.icon
+							.field
+								label(for='') 报名截止日期
+								.ui.left.icon.input
+									input(type='text', class="datetimepicker", name="ActivityDeadline", placeholder='报名截止日期', required)
+									i.time.icon
+						.ui.message.error.hidden.timeProblemForBeginGtEnd 活动开始时间不能大于活动结束时间
+						.ui.message.error.hidden.timeProblemForRegistertLtBegin 报名截止时间不能小于活动开始时间
+						.ui.message.error.hidden.timeProblemForBeginGtCurrent 活动开始时间不能小于当前时间
+						.ui.message.error.hidden.timeProblemForRegisterLtCurrent 报名截止时间不能小于当前	时间
+						.required.fields
+							.field
+								label(for='') 活动总人数
+								.ui.left.icon.input
+									input(type='number', name="PeopleNumber", placeholder='活动总人数', required)
+									i.users.icon
+							.field
+								label(for='') 活动类型
+								select.ui.dropdown(name='ActivityCategory')
+									option(value="0") 餐饮
+									option(value="1") 运动
+									option(value="2") 学习
+									option(value="3") 电影
+									option(value="4") 逛街
+									option(value="5") 开黑
+									option(value="6") 其他
+						.required.field
+							label(for='') 活动地点
+							.ui.left.icon.input
+								input(type='text', name="ActivityPlace", placeholder='活动地点', required)
+								i.building.icon
+						.required.inline.fields
+							label(for='') 是否公开你的联系方式？
+							br
+							br
+							.field
+								.ui.radio.checkbox
+									input(type='radio', name='PublicInfo', value='yes')
+									label 是的，现在公开
+							.field
+								.ui.radio.checkbox
+									input(type='radio', name='PublicInfo', value='no', checked)
+									label 不，暂时保密
+						.required.field
+							label(for='') 活动封面
+							.ui.two.column.grid
+								.column
+									.ui.center.aligned.basic.segment
+										.ui.fluid.card
+											.image
+												img(src="", id="cover")
+											.content
+												.header 封面预览
+												.description 选择漂亮的封面更容易吸引小伙伴
+										input(type='file', name='ActivityCover', class='ActivityCover', value="选择文件", required)
+								.column
+									.ui.center.aligned.basic.segment
+										.ui.fluid.card
+											.image
+												img(src="images/demoimage.jpg", alt="cover", id="cover")
+											.content
+												.header 封面示例
+												.description 选择漂亮的封面更容易吸引小伙伴
+						.required.field
+							label(for='') 活动描述
+							textarea(name="ActivityDescription", required)
+						.ui.vertical.right.aligned.basic.segment
+							input(name="submitButton", value="提交", type="submit", class="ui positive submit button")
+							.negative.ui.button.CancelForActivity 取消
+					.ui.segment
+						a.ui.green.ribbon.label 温馨提示
+						|                 提交之前记得核对活动信息 ^_^
+

@@ -1,0 +1,30 @@
+template(name="index")
+    header
+        h2.ui.header
+            div.content 活动列表
+            div.ui.divider
+    div.activity-list.ui.red.segment
+        h3.ui.header 最近发布的活动
+    div.activity-list.ui.yellow.segment
+        div.activity-list.ui.fuild.accordion
+            div.filter-title.title
+                h3.ui.header
+                    i.dropdown.icon
+                    按时间段筛选
+            div.filter-content.content
+                div.field.time-border
+                    span 从
+                    div.ui.left.icon.input
+                        input(type="text", name="lowerTime").datetimepicker.lower-time
+                        i.time.icon
+                    span 到
+                    div.ui.left.icon.input
+                        input(type="text", name="upperTime").datetimepicker.upper-time
+                        i.time.icon
+                button.filter.ui.green.button 筛选
+    div.activities-list
+        each activities
+            +activityItem
+        if nextPath
+            div.next-button
+                a.fluid.ui.button(href="#{nextPath}") 加载更多

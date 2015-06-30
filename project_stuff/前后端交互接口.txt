@@ -1,0 +1,116 @@
+﻿一、前后端数据交互
+
+说明:以下请求全部为GET请求，因为meteor前端可以直接操作数据库，因此无须将数据POST到后端，直接在前端操作数据库即可。
+     meteor的每一个页面除了其模板块，还有其helper(controler,控制其动态显示的数据)及events(前端事件控制，操作数据库在这里进行)
+     给出一个meteor中文学习文档做参考(若看英文文档辛苦的话。。。。。。): http://zh.discovermeteor.com
+
+1.首页
+    url: '/index'
+    data: activity[]
+    render: index.tpl.jade
+
+2.首页(按类筛选活动)
+    url: 'type/:typename'
+    data: activity[](find by type)
+    render: index.tpl.jade
+
+3.登录页面
+    url: '/login'
+    data: none  //只需渲染相应登录页面即可
+    render: login.tpl.jade
+
+4.注册页面
+    url: '/register'
+    data: none //同login
+    render: register.tpl.jade
+
+4.活动详情页
+    url: 'activity/:activityId
+    data: user, activity(find by Id)
+    render: activity.tpl.jade
+
+5.发布活动页
+    url: '/createActivity'
+    data: user
+    render: createActivity.tpl.jade
+ 
+6.活动详情页&评论
+    url: '/profile'
+    data: user, activity[](find by user)
+    render: 'profile.tpl.jade'
+
+二、meteor文件结构
+    根目录共分client、lib、server、public四个文件夹
+    其中client代码只在客户端（前端）运行,里面有css和templates文件夹，templates文件夹中存放各页面相关代码,每个页面有其jade和ls代码(helper和events)，存在一个文件夹
+    server代码只在服务器（后端）运行
+    lib代码在前后段都会运行,router代码在此文件夹,数据结构文件也在此文件夹
+    public用于存放图片等公共资源
+
+三、数据库schema
+    1.user {
+        id: objectId,
+        username: string,
+        password: string,
+        emails: string[],
+	    createAt: Date,
+        profile: {
+            nickname: string,
+            photo: string(path),
+            credit: int,
+            phone: num,
+            QQ: num,
+        }
+        //以下方法有些需传回调函数参数callback, 回调函数带有参数error
+        register(username, passsword, profile, callback),
+        login(username, password, callback),
+        logout(callback),  //登出函数，若未登录会产生error
+        currentUser(), //返回当前登录用户, 若未登录返回null
+        changePassword(oldPassword, newPassword, callback),
+        //修改密码，必须登录,否则产生error
+        change-information(profile, callback)
+        //修改profile的信息，注意传入的profile必须是完整的
+    }
+
+    2.Activity {
+        name: string,
+        sponsor: userId,
+        numOfPeople: int,
+        createAt: Date,
+        deadline: Date,
+        activityTime: Date,
+        description: string,
+        place: string,
+        open-or-not: boolean,
+        type: string,
+        cover: string(path),
+        applyList: {
+            applier: userId, //申请者id
+            success: boolean, //是否通过
+            scoreOfParticipator: int, //发起者对参与者的评分
+            comment: string,
+            scoreOfSponsor: int //参与者对发起者的评分
+        }[], //参与申请对象数组
+        insert(name, sponsor, num-of-people, startingTime, deadline, place, open-or-not, type, cover),
+        //插入（创建）新的活动，返回值为活动Id
+        delete(id),
+        //删除，失败返回'error'，否则返回'success'，参数为目标活动id
+        findById(id),
+        //如方法名，返回查找目标acitibity对象，若找不到返回null
+        findByType(type),
+        //通过类型查找，返回符合类型的activity对象数组，参数为类型名
+        addApplication(id, applier-id, credit, phone),
+        //添加活动参与申请，成功返回'success'，否则返回'error'，参数为活动id，申请者id，申请者的信用度和手机号码
+        getApplications(id)
+        //获取某activity对应的所有活动参与申请,返回申请对象数组，参数为活动id，若id对应活动不存在，返回null
+        getParticipateApplications(id)
+        //获取已经通过的参与申请，返回同上
+        chooseParticipator(id, applier-id)
+        //通过对应applier-id的活动参与申请，参数为活动id和申请人id，若id对应数据不存在，返回'error'，成功则返回'success'
+        calculateScore(id)
+        //计算发起者的评分
+        commentActivity(id, applier-id, comment)
+        //参与者评论活动，参数为活动id，参与者id，评论内容
+    }
+    注：我把可能要对数据库进行的操作都封装成了方法，尽量调用方法去读写数据库，另外user的collection涉及用户认证和密码加密，应该
+        要用meteor的account-password模块，我加入了一下方法,大家可以看看有没有什么问题。
+        type类我去掉了，MS在文档型数据库是不需要的。。。。。。所以现在只有两个collection。实现还没写完，大家可以帮忙看看代码，在lib文件夹的collections文件夹内

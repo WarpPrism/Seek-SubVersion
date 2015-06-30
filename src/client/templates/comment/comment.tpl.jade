@@ -1,0 +1,106 @@
+if true
+  .ui.two.column.grid
+    .column
+      .ui.piled.blue.segment
+        h2.ui.header
+          i.icon.inverted.circular.blue.comment
+          |  关于这次活动的评论
+        if nobodyCommented
+          h2 No one give a comment T.T
+        each commentedParticipators
+          .ui.comments
+            .comment
+              a.avatar
+                h3
+                  i.icon.user.inverted.green.circular
+              .content
+                a.author #{applier} 
+                .metadata
+                  span.date 1天前
+                .text
+                  | #{comment}
+                .actions
+                  a.reply 回复
+                  a.delete 删除
+      //  
+        .ui.comments
+          .comment
+            a.avatar
+              h3
+                i.icon.user.inverted.green.circular
+            .content
+              a.author 华寅
+              .metadata
+                span.date 2天前
+              .text
+                | 这次活动很好啊，视频教程都很清晰！
+              .actions
+                a.reply 回复
+                a.delete 删除
+          .comment
+            a.avatar
+              h3
+                i.icon.user.inverted.green.circular
+            .content
+              a.author 风信子
+              .metadata
+                span.date 2天前
+              .text
+                | 这次活动免费就好了。
+              .actions
+                a.reply 回复
+                a.delete 删除
+          .comment
+            a.avatar
+              h3
+                i.icon.user.inverted.green.circular
+            .content
+              a.author 安卡拦
+              .metadata
+                span.date 两天前
+              .text
+                | 如果这次活动能提供私信功能就好啦。
+              .actions
+                a.reply 回复
+                a.delete 删除
+          .comment
+            a.avatar
+              h3
+                i.icon.user.inverted.green.circular
+            .content
+              a.author WangQing
+              .metadata
+                span.date 2天前
+              .text
+                | 活动好了。
+              .actions
+                a.reply 回复
+                a.delete 删除
+    .column
+      .ui.piled.blue.segment
+        h2.ui.header
+          i.icon.inverted.circular.blue.heart
+          |  请为这次活动评分
+        if false
+          span #{commented}
+        else
+          .ui.form
+            .grouped.fields
+              .field
+                .ui.radio.checkbox
+                  input(type='radio', name='www', checked='checked')
+                  label 好评
+              .field
+                .ui.radio.checkbox
+                  input(type='radio', name='semantic')
+                  label 中评
+              .field
+                .ui.radio.checkbox
+                  input(type='radio', name='blog')
+                  label 差评
+              .field
+                textarea(name='comment')
+              .ui.fluid.blue.labeled.submit.icon.button(type='submit')
+                i.icon.edit
+                |  我也来评论一下！
+else

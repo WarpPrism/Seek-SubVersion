@@ -1,0 +1,60 @@
+template(name="changeProfile")
+    header
+        h2.ui.header
+            div.content 个人资料
+            div.ui.divider
+    section
+      .changeProfile
+        form(method="post")
+          .ui.form.segment
+            .field
+              label &#26165;&#31216;
+              .login-name
+                input(type="text", placeholder="Name", name="nickname", value="#{Currentuser.profile.nickname}")
+            .field
+              label &#24615;&#21035;
+              .login-sexual
+                select(name="sex")
+                  option(value="male", selected="#{sex.male}") &#30007;
+                  option(value="female", selected="#{sex.female}") &#22899;
+            .field.tel
+              label &#25163;&#26426;&#21495;&#30721;
+              .login-tel
+                input(type="text", placeholder="Tel", name="tel", value="#{Currentuser.profile.tel}")
+            .field.qq
+              label QQ
+              .login-qq
+                input(type="text", placeholder="QQ", name="qq", value="#{Currentuser.profile.qq}")
+            .field
+              label &#37038;&#31665;
+              .login-mail
+                input(type="text", placeholder="Mail", name="mail", value="#{Currentuser.profile.mail}")
+
+            .field.password
+              label 旧密码
+              .login-qq
+                input(type="password", placeholder="OldPassword", name="Oldpassword")
+            .ui.message.red.hidden.OldPasswordNotCorrect 原密码不正确
+            .ui.message.red.hidden.oldPasswordEmpty 原密码不能为空
+            .field.password
+              label 新密码
+              .login-qq
+                input(type="password", placeholder="Password", name="password")
+            .ui.message.red.hidden.passwordLengthProblem 密码不能小于六位
+            .field.confirmPassword
+              label 确认密码
+              .login-qq
+                input(type="password", placeholder="Password", name="confirmPassword")
+              .ui.message.red.hidden.passwordDifferentProblem 两次密码不一致
+            .field
+            .field.show-avatar-field-changeprofile
+              .show-avatar-changeprofile
+                img(src="", id="cover")
+              .ui.input
+                input(type="file", name="avatar" class="avatar-input")
+            
+              .ui.message.error.hidden.timeProblemForBeginGtEnd 活动开始时间不能大于活动结束时间
+            .ui.vertical.left.aligned.basic.segment
+              button.ui.positive.button.submit.confirmForModifyProfile(type="submit") &#30830;&#23450;
+              a.item(href="/")
+                    .negative.ui.button 取消
