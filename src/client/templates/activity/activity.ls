@@ -77,6 +77,9 @@ Template.activity.events {
 			else
 				Activity.temporary-container.push this.applier
 				parent.class-list.add("checked")
+	"click .choose" :(event) !->
+		console.log this
+		console.log "hello"
 	"click .ensure-select" : (event)!->
 		activity-id = Session.get "activityId"
 		for id in Activity.temporary-container
@@ -84,6 +87,15 @@ Template.activity.events {
 			Activity.choose-participator(activity-id, id, true)
 		while Activity.temporary-container.length is not 0
 			Activity.temporary-container.pop!
+
+	"click .ensure-choose": (event)!->
+		activity-id = Session.get "activityId"
+		checkboxs = $ ".choose"
+		for cbox in checkboxs
+			if cbox.checked is true
+				console.log "true"
+
+
 	"click .cancel_select": (event)!->
 		Activity.choose-participator(Session.get("activityId"), this.applier, false)
 
@@ -133,4 +145,6 @@ Template.activity.onRendered !->
 	if current-date > new Date (Activity.find-by-id Session.get "activityId" .startingTime)
 		console.log 'hi'
 		$ '.modify' .attr 'disabled', 'disabled'
+
+	$('.ui.checkbox').checkbox();
 

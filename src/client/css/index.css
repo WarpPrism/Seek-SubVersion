@@ -1,7 +1,3 @@
-.activity-cover {
-	display: inline-block;
-	margin-top: 40px;
-}
 
 .activity-info {
 	display: inline-block;
@@ -49,13 +45,27 @@
 }
 
 .time-border {
-	display: inline-block;
+	margin-top: 5px; 	
 }
 
-.filter {
+/* .filter {
 	float: right;
-}
+} */
 
 .to-hide {
 	display: none;
+}
+
+.divider {
+	position: relative;
+}
+
+.test-div {
+	border: solid 1px #000;
+}
+
+.outline-div {
+	margin: 10px;
+	height: 100%;
+	/* border: solid 3px gray; */
 }

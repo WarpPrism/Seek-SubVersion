@@ -1,124 +1,202 @@
 .twelve.wide.column
-  .ui.horizontal.segment
-    #mainPageContent
-      h4#activity-detail-title 活动详情
-      if isSponsor
-        #activity-detail-edit-button
-          button.ui.primary.button.modify 修改
-      #activity-detail-sponsor-info.ui.two.column.grid
-        .row
-          .column
-            .ui.raised.segment
-              #sponsor-info-name.ui.red.ribbon.label 活动名称
-              p #{activity.name}
-              #sponsor-info-order-num.ui.orange.ribbon.label 预定人数
-              p #{activity.numOfPeople}
-              #sponsor-info-meeting-address.ui.blue.ribbon.label 约会地点
-              p #{activity.place}
-              #sponsor-info-deadline.ui.green.ribbon.label 截止时间
-              p #{activity.deadline}
-              #sponsor-info-img.ui.teal.ribbon.label 封面图片
-              p
-              each images
-                img.rounded.ui.image(src="#{this.url}")
-              p
-              #sponsor-info-content.ui.green.ribbon.label 内容
-              p #{activity.description}
-              #sponsor-info-contact.ui.teal.ribbon.label 个人联系方式
-              if isAgree
-                p qq: #{isAgree}
-              else
-                p 保密
-      unless isSponsor
-        #activity-detail-follow
-          button.ui.button.blue.apply 报名
-      #activity-detail-select
-        h4.ui.header 筛选人员
-        #activity-detail-select-table
-          #table-header
-            ul
-              li 姓名
-              li 联系方式
-              li 信用度
-          each activity.applyList
-            unless this.success
-              .table-body
-                ul.select
-                  li #{applierName}
-                  li #{phone}
-                  li 2
-        if isSponsor
-          .ui.button.blue.ensure-select 确认筛选
-        //- else
-        //-   .ui.button.orange 评论
-      if isSponsorOrParticipant
-        #activity-detail-comment
-          h4.ui.header 参与人员
-          if isSponsor
-            #activity-detail-take-part-in-table
-              #table-header
-                ul
-                  li 姓名
-                  li 信用度
-                  li 评分
-              each activity.applyList
-                if this.success
-                  .table-body
-                    ul
-                      li #{applierName}
-                      li 4
-                      li
-                        .ui.rating.active.heart(id="#{applier}")
-                          i.icon
-                          i.icon
-                          i.icon
-                          i.icon
-                          i.icon
-                      .cancel_select
-          else
-            #activity-detail-take-part-in-table-for-participator
-              #table-header
-                ul
-                  li 姓名
-                  li 信用度
-              each activity.applyList
-                if this.success
-                  .table-body
-                    ul
-                      li #{applierName}
-                      li 4
+	.ui.horizontal.segment
+		#mainPageContent
+			.ui.black.segment
+				h2.ui.header
+					i.cubes.icon
+					.content 活动详情
+					.sub.header 查看活动的具体信息及相关人员
 
-      //- show comments
-      div.ui.blue.segment.form
-        h3.ui.header
-          i.icon.inverted.circular.blue.comment
-          |  关于这次活动的评论 
-        .ui.comments
-          if noneComment
-            h3
-              | 暂时没有评论，快来抢沙发～～
-          else
-            each commentors
-              +commentoritem
-      //-write down your commment
-      if isParticipantSuccess
-        form(method="post")
-          .ui.blue.segment
-            .ui.form
-              if isCommented
-                .grouped.fields
-                  .field
-                    .ui.button
-                      | 你已经评论过，你可以在下面进行修改！
-                  .field
-                    textarea(name='comment') #{commentContext}
-                  button.ui.fluid.blue.labeled.submit.icon.button(type='submit')
-                    i.icon.edit
-                    | 修改我的评论!
-              else
-                .grouped.fields
-                  .field
-                    textarea(name='comment' placeholder="你可以在这里写下你的评论！")
-                  button.ui.fluid.blue.labeled.submit.icon.button(type='submit')
-                    i.icon.edit
-                    |  我也来评论一下！
+			#activity-detail-body.ui.two.column.grid
+				.column
+					.ui.fluid.card
+						each images
+							img.ui.bordered.image#activity-cover(src="#{this.url}")
+						.content
+							a.header
+								| #{activity.name} 
+								i.angle.double.right.icon 
+						.extra
+							|评分：
+							.ui.star.active.rating
+								i.icon
+								i.icon
+								i.icon
+								i.icon
+								i.icon
+						if isSponsor
+							button.ui.bottom.attached.primary.button.modify
+								i.edit.icon
+								|修改活动信息
+						else
+							button.ui.bottom.attached.primary.button.apply
+								i.edit.icon
+								|我要报名
+				.column
+					.ui.fluid.card
+						.content
+							.ui.top.attached.big.label Details
+							.ui.selection.divided.list
+								.item
+									i.top.aligned.rocket.icon
+									.content
+										.header 活动名称
+										.description #{activity.name}
+								.item
+									i.top.aligned.building.icon
+									.content
+										.header 活动地点
+										.description #{activity.place}
+								.item
+									i.top.aligned.users.icon
+									.content
+										.header 预定人数
+										.description #{activity.numOfPeople}
+								.item
+									i.top.aligned.time.icon
+									.content
+										.header 报名截止时间
+										.description #{activity.deadline}
+								.item
+									i.top.aligned.building.icon
+									.content
+										.header 活动地点
+										.description #{activity.place}
+								.item
+									i.top.aligned.call.icon
+									.content
+										.header 发起人联系方式
+										.description
+											unless isAgree
+												p 暂时保密
+											else
+												p qq: #{isAgree}
+												
+								.item
+									i.top.aligned.announcement.icon
+									.content
+										.header
+											|活动描述
+										.description #{activity.description}
+					.ui.message
+						p * 活动信息若有出入，一切以发起人说法为主
+
+			//- .ui.divider
+			//- #activity-member-body
+			//- 	table.ui.four.column.striped.celled.table
+			//- 		thead
+			//- 			tr
+			//- 				th 姓名
+			//- 				th 联系方式
+			//- 				th 信用度
+			//- 				if isSponsor
+			//- 					th 是否同意该申请
+			//- 		tbody
+			//- 			each activity.applyList
+			//- 				unless this.success
+			//- 					tr
+			//- 						td.ui.small.header #{applierName}
+			//- 						td.ui.small.header #{phone}
+			//- 						td.ui.small.header 2
+			//- 						if isSponsor
+			//- 							td.collapsing
+			//- 								//- label 否&nbsp;
+			//- 								.ui.fitted.toggle.checkbox
+			//- 									input.choose(type="checkbox", name="", checked="true")
+			//- 									label
+			//- 								//- label &nbsp;是
+			//- 	if isSponsor
+			//- 		.ui.right.floated.small.primary.labeled.icon.button.ensure-choose
+			//- 			i.checkmark.icon
+			//- 			|确认筛选
+
+			//- #activity-detail-follow
+			//- #activity-detail-select
+			//- 	h4.ui.header 筛选人员
+			//- 	#activity-detail-select-table
+			//- 		#table-header
+			//- 			ul
+			//- 				li 姓名
+			//- 				li 联系方式
+			//- 				li 信用度
+			//- 		each activity.applyList
+			//- 			unless this.success
+			//- 				.table-body
+			//- 					ul.select
+			//- 						li #{applierName}
+			//- 						li #{phone}
+			//- 						li 2
+			//- 	if isSponsor
+			//- 		.ui.button.blue.ensure-select 确认筛选
+
+			//- if isSponsorOrParticipant
+			//- 	#activity-detail-comment
+			//- 		h4.ui.header 参与人员
+			//- 		if isSponsor
+			//- 			#activity-detail-take-part-in-table
+			//- 				#table-header
+			//- 					ul
+			//- 						li 姓名
+			//- 						li 信用度
+			//- 						li 评分
+			//- 				each activity.applyList
+			//- 					if this.success
+			//- 						.table-body
+			//- 							ul
+			//- 								li #{applierName}
+			//- 								li 4
+			//- 								li
+			//- 									.ui.rating.active.heart(id="#{applier}")
+			//- 										i.icon
+			//- 										i.icon
+			//- 										i.icon
+			//- 										i.icon
+			//- 										i.icon
+			//- 								.cancel_select
+			//- 		else
+			//- 			#activity-detail-take-part-in-table-for-participator
+			//- 				#table-header
+			//- 					ul
+			//- 						li 姓名
+			//- 						li 信用度
+			//- 				each activity.applyList
+			//- 					if this.success
+			//- 						.table-body
+			//- 							ul
+			//- 								li #{applierName}
+			//- 								li 4
+
+			//- show comments
+			div.ui.blue.segment.form
+				h3.ui.header
+					i.icon.inverted.circular.blue.comment
+					|  关于这次活动的评论 
+				.ui.comments
+					if noneComment
+						h3
+							| 暂时没有评论，快来抢沙发～～
+					else
+						each commentors
+							+commentoritem
+			//-write down your commment
+			if isParticipantSuccess
+				form(method="post")
+					.ui.blue.segment
+						.ui.form
+							if isCommented
+								.grouped.fields
+									.field
+										.ui.button
+											| 你已经评论过，你可以在下面进行修改！
+									.field
+										textarea(name='comment') #{commentContext}
+									button.ui.fluid.blue.labeled.submit.icon.button(type='submit')
+										i.icon.edit
+										| 修改我的评论!
+							else
+								.grouped.fields
+									.field
+										textarea(name='comment' placeholder="你可以在这里写下你的评论！")
+									button.ui.fluid.blue.labeled.submit.icon.button(type='submit')
+										i.icon.edit
+										|  我也来评论一下！

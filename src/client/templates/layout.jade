@@ -4,185 +4,162 @@ template(name="layout")
 			meta(charset='UTF-8')
 			title Seek
 		body
-			.ui.left.vertical.labeled.icon.sidebar.menu
-				a.item
-					i.leaf.icon
-				a.item
-					.ui.header 柔
-				a.item
-					.ui.header 静
-				a.item
-					.ui.header 处
-				a.item
-					.ui.header 下
-				a.item
-					.ui.header ，
-				a.item
-					.ui.header 随
-				a.item
-					.ui.header 遇
-				a.item
-					.ui.header 而
-				a.item
-					.ui.header 安
-				a.item
-					.ui.header 。
-			.pusher
-				if isLoginRegister
-					#layoutMain
-						#topMenu
-							.ui.blue.large.menu
-								if userinformation
-									.left.menu
-										a.header.item.home-btn SEEK
-											.ui.red.horizontal.label 欢迎
-									.right.menu
-										a.item.home-btn.active.homeMenuItem
-											i.home.icon
-											|	主页
-										a.item.profile-btn.centerMenuItem
-											i.user.icon
-											|	个人中心
-										a.item
-											.ui.right.labeled.icon.negative.button.logout-btn
-												i.sign.out.icon
-												|               登出
-								else
-									.left.menu
-										a.header.item.home-btn SEEK
-											.ui.green.horizontal.label 欢迎
-									.right.menu
-										a.item
-											.ui.right.labeled.icon.positive.button.login-btn
-												i.sign.in.icon
-												|               登录
-						.ui.divider
-						.ui.two.column.grid
-							.four.wide.column
-								.ui.horizontal.segment
-									#sidebar
-										if userinformation
-											.sidebarBlock
-												.ui.fluid.blue.label 个人信息
-												.ui.center.aligned.basic.segment
-													each userinformation
-														img.ui.centered.image#userAvatar(src='{{this.url}}', alt="avatar")
-													
-													a.ui.header.profile-btn {{currentUserNickName}}
-	
-											.sidebarBlock
-												.ui.fluid.blue.label 选项
-												.ui.selection.list
-													a.item.home-btn
-														i.search.icon
-														.content
-															.header 我要参与活动
-													a.item.createActivity-btn
-														i.flag.icon
-														.content
-															.header 我要发布活动
-													a.item.changeProfile-btn
-														i.setting.icon
-														.content
-															.header 修改个人资料
-	
-										.sidebarBlock
-											.ui.fluid.blue.label 活动分类
-											.ui.selection.list
-												.item
-													i.food.icon
-													.content
-														a(href="/")
-															.header 全部
-												.item
-													i.food.icon
-													.content
-														a(href="/type/0")
-															.header 餐饮
-												.item
-													i.sun.icon
-													.content
-														a(href="/type/1")
-															.header 运动
-												.item
-													i.book.icon
-													.content
-														a(href="/type/2")
-															.header 学习
-												.item
-													i.film.icon
-													.content
-														a(href="/type/3")
-															.header 电影
-												.item
-													i.shop.icon
-													.content
-														a(href="/type/4")
-															.header 逛街
-												.item
-													i.game.icon
-													.content
-														a(href="/type/5")
-															.header 开黑
-												.item
-													i.tasks.icon
-													.content
-														a(href="/type/6")
-															.header 其他
-							.twelve.wide.column
-								+yield
-						.ui.divider
-						.layout_footer
-							.ui.center.aligned.blue.segment
-								.ui.horizontal.list
-									a.item(href="") 欢迎页面
-									a.item(href="") 关于我们
-									a.item(href="") 问题反馈 (不可用)
-								br
-								|	Copyright &copy; SYSU SS SPI Group 5
-								br
-								|	2015 05/06
-	
-				else
-					.ui.inverted.teal.segment
-					.apptitle
-	
+			if isLoginRegister
+				#layoutMain
+					#topMenu
+						.ui.blue.inverted.large.menu.toptheme
+							if userinformation
+								.left.menu
+									a.header.item.home-btn SEEK
+										.ui.red.horizontal.label 欢迎
+									a.item.theme 更换主题
+								.right.menu
+									a.item.home-btn.active.homeMenuItem
+										i.home.icon
+										|	主页
+									a.item.profile-btn.centerMenuItem
+										i.user.icon
+										|	个人中心
+									a.item
+										.ui.right.labeled.icon.negative.button.logout-btn
+											i.sign.out.icon
+											|               登出
+							else
+								.left.menu
+									a.header.item.home-btn SEEK
+										.ui.green.horizontal.label 欢迎
+								.right.menu
+									a.item
+										.ui.right.labeled.icon.positive.button.login-btn
+											i.sign.in.icon
+											|               登录
 					.ui.divider
-					#lr_main
-						.ui.centered.two.column.grid.lr_body
-							.six.wide.column
-								.introductiondiv
-									.introduction_pic
-										.introduction_txt
-											.ui.header SEEK 
-												.sub.header 一款专注线下的web社交平台
-											.ui.header SEEK 语丝
-											.ui.list
-												a.item
-													i.leaf.icon
+					.ui.two.column.grid#layoutBody
+						.four.wide.column
+							#sidebar
+									if userinformation
+										.sidebarBlock
+											.ui.fluid.blue.label 个人信息
+											.ui.center.aligned.basic.segment
+												each userinformation
+													img.ui.centered.image#userAvatar(src='{{this.url}}', alt="avatar")
+												
+												a.ui.header.profile-btn {{currentUserNickName}}
+
+										.sidebarBlock
+											.ui.fluid.blue.label 选项
+											.ui.selection.list
+												a.item.home-btn
+													i.search.icon
 													.content
-														| 我本是个不安分的小孩，有时还爱异想天开，一心要在生活中寻找某种不同寻常的夺目光彩。
-														br
-														span —— 《钢铁是怎样炼成的》
-												a.item
-													i.leaf.icon
+														.header 我要参与活动
+												a.item.createActivity-btn
+													i.flag.icon
 													.content
-														| 我在冰峰的深海，寻找希望的缺口，却在惊醒时，瞥见绝美的阳光！
-														br
-														span —— 几米
-												a.item
-													i.leaf.icon
+														.header 我要发布活动
+												a.item.changeProfile-btn
+													i.setting.icon
 													.content
-														| ...
-											//- .ui.header 而你又在SEEK什么？ 
-											//- 	.sub.header	加入SEEK，重新认识生活
-							
-							.six.wide.column
-								if isLogin
-									.ui.center.aligned.header 登录
-									+login
-								else
-									.ui.center.aligned.header 注册
-									+register
-					.lr_footer
-						.ui.inverted.teal.segment
+														.header 修改个人资料
+
+									.sidebarBlock
+										.ui.fluid.blue.label 活动分类
+										.ui.selection.list
+											.item
+												i.inbox.icon
+												.content
+													a(href="/")
+														.header 全部
+											.item
+												i.food.icon
+												.content
+													a(href="/type/0")
+														.header 餐饮
+											.item
+												i.sun.icon
+												.content
+													a(href="/type/1")
+														.header 运动
+											.item
+												i.book.icon
+												.content
+													a(href="/type/2")
+														.header 学习
+											.item
+												i.film.icon
+												.content
+													a(href="/type/3")
+														.header 电影
+											.item
+												i.shop.icon
+												.content
+													a(href="/type/4")
+														.header 逛街
+											.item
+												i.game.icon
+												.content
+													a(href="/type/5")
+														.header 开黑
+											.item
+												i.tasks.icon
+												.content
+													a(href="/type/6")
+														.header 其他
+						.twelve.wide.column
+							#layout-right-body
+								+yield
+
+					.layout_footer
+						.ui.center.aligned.blue.inverted.segment.foottheme
+							.ui.horizontal.celled.list
+								.item(href="") 欢迎页面
+								.item(href="") 关于我们
+								.item(href="") 问题反馈
+							//- br
+							//- |	Copyright &copy; SYSU SS SPI Group 5
+							//- br
+							//- |	2015.05 ~ 2015.06
+
+			else
+				.ui.inverted.teal.segment
+				.apptitle
+
+				.ui.divider
+				#lr_main
+					.ui.centered.two.column.grid.lr_body
+						.six.wide.column
+							.introductiondiv
+								.introduction_pic
+									.introduction_txt
+										.ui.header SEEK 
+											.sub.header 一款专注线下的web社交平台
+										.ui.header SEEK 语丝
+										.ui.list
+											a.item
+												i.leaf.icon
+												.content
+													| 我本是个不安分的小孩，有时还爱异想天开，一心要在生活中寻找某种不同寻常的夺目光彩。
+													br
+													span —— 《钢铁是怎样炼成的》
+											a.item
+												i.leaf.icon
+												.content
+													| 我在冰峰的深海，寻找希望的缺口，却在惊醒时，瞥见绝美的阳光！
+													br
+													span —— 几米
+											a.item
+												i.leaf.icon
+												.content
+													| ...
+										//- .ui.header 而你又在SEEK什么？ 
+										//- 	.sub.header	加入SEEK，重新认识生活
+						
+						.six.wide.column
+							if isLogin
+								.ui.center.aligned.header 登录
+								+login
+							else
+								.ui.center.aligned.header 注册
+								+register
+				.lr_footer
+					.ui.inverted.teal.segment

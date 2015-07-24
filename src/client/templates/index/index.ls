@@ -21,6 +21,8 @@ Template.index.events({
                 $(block) .add-class 'to-hide'
             else
                 $(block) .remove-class 'to-hide'
+    'click .test': ->
+        $ '.ui.fullscreen.modal' .modal("show")
 })
 
 Template.type.helpers({
@@ -53,3 +55,4 @@ Template.type.events({
 
 Template.index.onRendered !->
     $ '.datetimepicker' .datetimepicker!
+    $ '.ui.fullscreen.modal' .modal('attach events', '.test', 'show')

@@ -1,10 +1,9 @@
-.pusher {
+body {
 	background: #fff;
 }
 
-#layoutMain {
-	width: 90%;
-	margin: 1% auto 5%;
+#layoutBody {
+	margin: 2px 5px 20px;
 }
 
 #userAvatar {
@@ -22,8 +21,18 @@ a:hover {
 }
 
 #sidebar {
-/* 	border: 3px solid #428bca;
-border-radius: 6px; */
+	padding: 5px;
+	box-shadow: 5px 5px 20px gray;
+	/* border-right: 3px solid #428bca;
+	border-left: 3px solid #428bca;
+	border-top: 3px solid #428bca;
+	border-bottom: 3px solid #428bca;
+	border-radius: 6px; */
+}
+
+#layout-right-body {
+	padding: 5px;
+	box-shadow: 5px 5px 20px gray;
 }
 
 .sidebarBlock {

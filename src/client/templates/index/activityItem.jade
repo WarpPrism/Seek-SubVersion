@@ -1,25 +1,47 @@
 template(name="activityItem")
-    div.activity-item.ui.blue.segment
-        div.name-block
-            div.activity-name.ui.ribbon.blue.label
-                h1 #{name}
-        div.activity-cover
-            each images
-                img(src="{{this.url}}")
-        div.activity-info.activity-detail
-            a.ui.blue.button(href="/activity/#{_id}") 活动详情
-        div.activity-info
-            div.info-block.ui.vertical.orange.inverted.segment
-                p 时间:
-                    span.starting-time #{startingTime}
-            div.info-block.ui.vertical.inverted.segment.green
-                p 地点: #{place}
-            div.info-block.ui.vertical.inverted.segment.purple
-                p 发起人:
-                    span
-                        each sponsorImages
-                            img.ui.avatar.image(src="#{this.url}")
-                    span #{sponsor}
-            div.info-block.ui.vertical.inverted.teal.segment
-                p 类型: #{typename}
+    //- div.activity-item.ui.blue.segment
+    //-     div.name-block
+    //-         div.activity-name.ui.ribbon.blue.label
+    //-             h1 #{name}
+    //-     div.activity-cover
+    //-         each images
+    //-             img(src="{{this.url}}")
+    //-     div.activity-info.activity-detail
+    //-         a.ui.blue.button(href="/activity/#{_id}") 活动详情
+    //-     div.activity-info
+    //-         div.info-block.ui.vertical.orange.inverted.segment
+    //-             p 时间:
+    //-                 span.starting-time #{startingTime}
+    //-         div.info-block.ui.vertical.inverted.segment.green
+    //-             p 地点: #{place}
+    //-         div.info-block.ui.vertical.inverted.segment.purple
+    //-             p 发起人:
+    //-                 span
+    //-                     each sponsorImages
+    //-                         img.ui.avatar.image(src="#{this.url}")
+    //-                 span #{sponsor}
+    //-         div.info-block.ui.vertical.inverted.teal.segment
+    //-             p 类型: #{typename}
+
+    .ui.blue.segment
+        .ui.three.column.grid
+            .three.wide.column
+                each images
+                    img.ui.rounded.bordered.image(src="{{this.url}}")
+            .six.wide.column.outline-div
+                //- .ui.top.right.attached.label Label
+                .ui.header
+                    i.puzzle.icon
+                    .content
+                        |#{name}
+                .ui.message
+                    p 地点:#{place}
+                .ui.message
+                    p 发起人:#{sponsor}
+            .six.wide.column
+                .ui.right.aligned.basic.segment.activity-detail-button
+                    a.ui.right.labeled.icon.button(href="/activity/#{_id}")
+                        |活动详情
+                        i.share.icon
+
 

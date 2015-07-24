@@ -56,8 +56,13 @@ Template.layout.events {
 		$ ".centerMenuItem" .remove-class "active"
 		Router.go "/changeProfile"
 
-	"click .apptitle": !->
-		$('.left.sidebar').sidebar('toggle');
+	"click .theme": !->
+		if $ ".toptheme" .has-class "inverted"
+			$ ".toptheme" .remove-class "inverted"
+			$ ".foottheme" .remove-class "inverted"
+		else
+			$ ".toptheme" .add-class "inverted"
+			$ ".foottheme" .add-class "inverted"
 
 }
 

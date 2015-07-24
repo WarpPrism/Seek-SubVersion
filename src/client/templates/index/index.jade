@@ -1,30 +1,31 @@
 template(name="index")
-    header
+    .ui.black.segment
         h2.ui.header
-            div.content 活动列表
-            div.ui.divider
-    div.activity-list.ui.red.segment
-        h3.ui.header 最近发布的活动
-    div.activity-list.ui.yellow.segment
-        div.activity-list.ui.fuild.accordion
-            div.filter-title.title
-                h3.ui.header
-                    i.dropdown.icon
-                    按时间段筛选
-            div.filter-content.content
-                div.field.time-border
-                    span 从
-                    div.ui.left.icon.input
-                        input(type="text", name="lowerTime").datetimepicker.lower-time
-                        i.time.icon
-                    span 到
-                    div.ui.left.icon.input
-                        input(type="text", name="upperTime").datetimepicker.upper-time
-                        i.time.icon
-                button.filter.ui.green.button 筛选
+            i.home.icon
+            .content 主页
+            .sub.header 查看最近发布的所有活动
+    .ui.divider
+    .ui.basic.segment
+        .ui.header 按时间段筛选
+        .ui.label From
+        div.ui.left.icon.input
+            input(type="text", name="lowerTime", placeholder="Start Time").datetimepicker.lower-time
+            i.time.icon
+        .ui.label To&nbsp;&nbsp;&nbsp;&nbsp;
+        div.ui.left.icon.input
+            input(type="text", name="upperTime", placeholder="End Time").datetimepicker.upper-time
+            i.time.icon
+        button.filter.ui.left.labeled.icon.positive.tiny.button 
+            i.checkmark.icon
+            |筛选
+    .ui.divider
+
     div.activities-list
         each activities
             +activityItem
         if nextPath
             div.next-button
                 a.fluid.ui.button(href="#{nextPath}") 加载更多
+
+    //- div.activity-list.ui.red.segment
+    //-     h3.ui.header 最近发布的活动

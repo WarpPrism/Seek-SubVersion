@@ -55,7 +55,7 @@ root.Activity = {
         else
             this.collection.remove id
             return 'success'
-    # zuo wei fa qi reng de ji he
+    # zuo wei fa qi ren de ji he
     find-by-username-has-not-participated: (username)->
         this.collection.find {
             $or: [

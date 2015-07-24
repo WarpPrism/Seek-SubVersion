@@ -35,3 +35,4 @@ cfs:ejson-file
 ryanswapp:datetime-picker
 semantic:ui-modal
 semantic:ui-dimmer
+jquery
